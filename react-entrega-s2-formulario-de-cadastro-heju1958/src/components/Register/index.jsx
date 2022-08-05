@@ -1,24 +1,14 @@
-import * as yup from "yup";
-
+import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
-
-import axios from "axios";
-
-import FeedBack from "../FeedBack";
+import { formSchema } from "../validations";
+import { Form, Container, Header } from "../Styles";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const formSchema = yup.object().shape({
-    email: yup.string().required("Email obrigatório"),
-    password: yup.string().required("Senha obrigatória"),
-    confirm_password: yup.string().required("Senha obrigatória"),
-    name: yup.string().required("Nome obrigatório"),
-    bio: yup.string().required("Bio obrigatória"),
-    contact: yup.string().required("Conato obrigatório"),
-    course_module: yup.string().required("Módulo obrigatório"),
-  });
-
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -27,91 +17,100 @@ const Register = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const [login, setLogin] = useState([]);
-
   const onSubmitFunction = (data) => {
-    setLogin(data);
-    request(login);
+    const { name, password, email, bio, contact, course_module } = data;
+    const newData = {
+      name,
+      password,
+      email,
+      bio,
+      contact,
+      course_module,
+    };
+    request(newData);
   };
 
   const url = "https://kenziehub.herokuapp.com/users";
 
-  const [isLogin, setIslogin] = useState(false);
-
-  const request = (login) => {
+  const request = (create) => {
     axios
-      .post(url, login)
+      .post(url, create)
       .then(function (response) {
-        setIslogin(true);
+        toast.success("Conta criada com sucesso!");
+        navigate(`/`);
       })
       .catch(function (error) {
-        console.log(error);
+        toast.error("Ops! Algo deu errado");
       });
   };
 
   return (
-    <div>
-      <div>
-        Logo
-        <button>Voltar</button>
-      </div>
-      <p>Crie sua Conta</p>
-      <p>Rapido e grátis, vamos nessa</p>
-      <form onSubmit={handleSubmit(onSubmitFunction)}>
+    <Container initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <Header>
+        <img src="./Logo.png" alt="logo" />
+        <button onClick={() => navigate(`/`)}>Voltar</button>
+      </Header>
+      <Form onSubmit={handleSubmit(onSubmitFunction)}>
+        <p className="conta">Crie sua Conta</p>
+        <p>Rapido e grátis, vamos nessa</p>
         <label>Nome</label>
         <input
           type="text"
           placeholder="Digite aqui seu nome"
           {...register("name")}
         />
-        {errors.name?.message}
+        <span>{errors.name?.message}</span>
         <label>Email</label>
         <input
           type="email"
           placeholder="Digite aqui seu email"
           {...register("email")}
         />
-        {errors.email?.message}
+        <span>{errors.email?.message}</span>
         <label>Senha</label>
         <input
           type="password"
           placeholder="Digite aqui sua senha"
           {...register("password")}
         />
+        <span>{errors.password?.message}</span>
         <label>Confirmar Senha</label>
         <input
           type="password"
           placeholder="Confirme aqui sua senha"
           {...register("confirm_password")}
         />
-        {errors.confirm_password?.message}
+        <span>{errors.confirm_password?.message}</span>
         <label>Bio</label>
         <input type="text" placeholder="Fale sobre você" {...register("bio")} />
-        {errors.bio?.message}
+        <span>{errors.bio?.message}</span>
         <label>Contato</label>
         <input
           type="text"
           placeholder="Opção de contato"
           {...register("contact")}
         />
-        {errors.contact?.message}
+        <span>{errors.contact?.message}</span>
         <label>Selecionar módulo</label>
         <select {...register("course_module")}>
           {" "}
-          <option value={1}>Primeiro Módulo</option>
-          <option value={2}>Segundo Módulo (Frontend avançado)</option>
-          <option value={3}>Terceiro Módulo</option>
-          <option value={4}>Quarto Módulo</option>
-          <option value={5}>Quinto Módulo</option>
-          <option value={6}>Sexto Módulo</option>
+          <option value={"Primeiro módulo (Introdução ao Frontend)"}>
+            Primeiro módulo (Introdução ao Frontend)
+          </option>
+          <option value={"Segundo módulo (Frontend avançado)"}>
+            Segundo módulo (Frontend avançado)
+          </option>
+          <option value={"Terceiro módulo (Introdução ao Backend)"}>
+            Terceiro módulo (Introdução ao Backend)
+          </option>
+          <option value={"Quarto módulo (Backend Avançado)"}>
+            Quarto módulo (Backend Avançado)
+          </option>
         </select>
-        {errors.course_module?.message}
+        <span>{errors.course_module?.message}</span>
         <button type="submit">Cadastrar</button>
-      </form>
-      <div>
-        <FeedBack isLogin={isLogin} />
-      </div>
-    </div>
+      </Form>
+    </Container>
   );
 };
 
