@@ -24,3 +24,8 @@ export const formSchemaLogin = yup.object().shape({
     .min(8, "No mínimo 8 caracteres")
     .required("Senha obrigatória"),
 });
+
+export const formSchemaTech = yup.object().shape({
+  title: yup.string(),
+  status: yup.string(),
+});

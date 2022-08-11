@@ -1,14 +1,15 @@
-import axios from "axios";
-import "react-toastify/dist/ReactToastify.css";
-import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { formSchema } from "../validations";
 import { Form, Container, Header } from "../Styles";
+import { UserContext } from "../context/UserContext";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const { onSubmitRegister } = useContext(UserContext);
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -17,40 +18,13 @@ const Register = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const onSubmitFunction = (data) => {
-    const { name, password, email, bio, contact, course_module } = data;
-    const newData = {
-      name,
-      password,
-      email,
-      bio,
-      contact,
-      course_module,
-    };
-    request(newData);
-  };
-
-  const url = "https://kenziehub.herokuapp.com/users";
-
-  const request = (create) => {
-    axios
-      .post(url, create)
-      .then(function (response) {
-        toast.success("Conta criada com sucesso!");
-        navigate(`/`);
-      })
-      .catch(function (error) {
-        toast.error("Ops! Algo deu errado");
-      });
-  };
-
   return (
     <Container initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <Header>
         <img src="./Logo.png" alt="logo" />
         <button onClick={() => navigate(`/`)}>Voltar</button>
       </Header>
-      <Form onSubmit={handleSubmit(onSubmitFunction)}>
+      <Form onSubmit={handleSubmit(onSubmitRegister)}>
         <p className="conta">Crie sua Conta</p>
         <p>Rapido e grátis, vamos nessa</p>
         <label>Nome</label>

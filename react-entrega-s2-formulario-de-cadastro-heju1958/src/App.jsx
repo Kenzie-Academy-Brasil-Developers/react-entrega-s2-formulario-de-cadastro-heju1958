@@ -1,29 +1,16 @@
-import { Routes, Route } from "react-router-dom";
-import "./App.css";
-import Login from "./components/Login";
-import Register from "./components/Register";
+import "./global.style.css";
 import Dasboard from "./components/Dasboard";
-import { useState } from "react";
+import Login from "./components/Login";
+import { Routes, Route } from "react-router-dom";
+import Register from "./components/Register";
 
 function App() {
-  const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState([]);
-
   return (
     <div className="App">
       <Routes>
-        <Route path="/dasboard" element={<Dasboard user={user} />} />
-        <Route
-          path="/"
-          element={
-            <Login
-              loading={loading}
-              setLoading={setLoading}
-              setUser={setUser}
-            />
-          }
-        />
-        <Route path="/register" element={<Register />} user={user} />
+        <Route path="/dasboard" element={<Dasboard />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );

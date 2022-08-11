@@ -16,13 +16,33 @@ export const Box = styled(motion.div)`
   img {
     margin-bottom: 1rem;
   }
+  .dadosUser {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+  }
+  @media (min-width: 900px) {
+    .dadosUser {
+      display: flex;
+      flex-direction: row;
+    }
+  }
   div {
     display: flex;
-    margin-left: 1.4rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
     justify-content: space-between;
-
     .nameUser {
       font-weight: 800;
+    }
+    .addTech {
+      margin-top: 1rem;
+      width: 2rem;
+      height: 2rem;
+      font-weight: bold;
+      background: #212529;
+      border: none;
+      color: white;
     }
   }
 `;
@@ -86,5 +106,99 @@ export const Form = styled.form`
   .botao_entrar {
     background: #ff577f;
     margin-bottom: 0;
+  }
+`;
+
+export const Modal = styled(motion.div)`
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  background: #212529;
+  border-radius: 5px;
+  text-align: left;
+  position: absolute;
+
+  @media (min-width: 900px) {
+    left: 40%;
+  }
+
+  div {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    background: #343b41;
+    .x {
+      width: 0;
+      height: 0;
+      margin: 0.9rem;
+      background: none;
+    }
+  }
+  p {
+    margin-left: 1rem;
+    color: white;
+  }
+  label {
+    text-align: start;
+    margin-left: 0.8rem;
+    font-style: normal;
+    font-size: 0.8rem;
+  }
+  input {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  select {
+    margin-top: 1rem;
+    width: 91%;
+  }
+  button {
+    background: #ff577f;
+    color: white;
+    height: 2.5rem;
+    border: none;
+    border-radius: 4px;
+    width: 92%;
+    margin-left: 0.6rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+`;
+
+export const Lista = styled.ul`
+  background: #212529;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  li {
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+    background: #121214;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.6rem;
+  }
+  button {
+    background: none;
+    border: none;
+    img {
+      margin: 0;
+    }
+  }
+  @media (min-width: 900px) {
+    li {
+      justify-content: space-between;
+      p {
+        margin: 1rem;
+      }
+      button {
+        margin: 1rem;
+      }
+    }
   }
 `;
