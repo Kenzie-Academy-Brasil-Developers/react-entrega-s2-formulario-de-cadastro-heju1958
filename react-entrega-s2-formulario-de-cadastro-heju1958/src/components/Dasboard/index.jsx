@@ -26,7 +26,7 @@ const Dasboard = () => {
       </Header>
       <div className="dadosUser">
         <p className="nameUser">Olá, {user.name}</p>
-        <p>{user.course_module}</p>
+        <p className="module">{user.course_module}</p>
       </div>
       <div>
         <p>Tecnologias</p>
@@ -40,10 +40,12 @@ const Dasboard = () => {
           techs.map((elem, id) => (
             <li key={id}>
               <p>{elem.title}</p>
-              <p>{elem.status}</p>
-              <button onClick={() => deleteTech(elem.id)} disabled={loading}>
-                <img src="./iconeExcluir.png" alt="icone excluir" />
-              </button>
+              <div>
+                <p className="status">{elem.status}</p>
+                <button onClick={() => deleteTech(elem.id)} disabled={loading}>
+                  <img src="./iconeExcluir.png" alt="icone excluir" />
+                </button>
+              </div>
             </li>
           ))
         ) : (

@@ -35,6 +35,9 @@ export const Box = styled(motion.div)`
     .nameUser {
       font-weight: 800;
     }
+    .module {
+      color: #868e96;
+    }
     .addTech {
       margin-top: 1rem;
       width: 2rem;
@@ -130,8 +133,10 @@ export const Modal = styled(motion.div)`
     .x {
       width: 0;
       height: 0;
-      margin: 0.9rem;
+      margin: 0.3rem;
+      padding: 1rem;
       background: none;
+      color: lightgrey;
     }
   }
   p {
@@ -182,6 +187,12 @@ export const Lista = styled.ul`
     margin-top: 1rem;
     margin-bottom: 1rem;
     border-radius: 0.6rem;
+  }
+  li:hover {
+    background: #343b41;
+  }
+  .status {
+    color: #868e96;
   }
   button {
     background: none;
