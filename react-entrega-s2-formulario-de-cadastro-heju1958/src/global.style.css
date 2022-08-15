@@ -1,12 +1,13 @@
 .App {
   text-align: center;
+  padding: 1rem;
 }
 body {
-  background: black;
+  background: #121214;
   color: white;
 }
 input {
-  width: 90%;
+  width: 94%;
   height: 2.5rem;
   margin-left: 0.6rem;
   color: #868e96;
@@ -16,7 +17,7 @@ input {
 }
 select {
   border: none;
-  width: 90%;
+  width: 94%;
   height: 2.5rem;
   background: #343b41;
   color: #868e96;

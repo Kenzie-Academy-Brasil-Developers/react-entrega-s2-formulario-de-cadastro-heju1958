@@ -2,17 +2,18 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 export const Container = styled(motion.div)`
-  max-width: 300px;
+  max-width: 350px;
   margin: 1rem auto;
-
   img {
     margin-bottom: 1rem;
+  }
+  .imgLogin {
+    margin-top: 10rem;
   }
 `;
 export const Box = styled(motion.div)`
   max-width: 900px;
   margin: 2rem auto;
-
   img {
     margin-bottom: 1rem;
   }
@@ -20,6 +21,10 @@ export const Box = styled(motion.div)`
     display: flex;
     flex-direction: column;
     text-align: start;
+    padding: 1rem;
+    border: 1px solid #212529;
+    border-left: none;
+    border-right: none;
   }
   @media (min-width: 900px) {
     .dadosUser {
@@ -55,10 +60,7 @@ export const Header = styled.div`
   justify-content: space-between;
   margin-bottom: 1rem;
   margin: 1rem;
-  img {
-    width: 7rem;
-    height: 1.4rem;
-  }
+  margin-top: 6rem;
   button {
     width: 4rem;
     height: 2rem;
@@ -75,8 +77,11 @@ export const Form = styled.form`
   gap: 1rem;
   background: #212529;
   border-radius: 5px;
+  padding: 0.5rem;
   p {
     color: #868e96;
+    font-size: 0.8rem;
+    margin: 0.5rem;
   }
   span {
     color: gray;
@@ -85,6 +90,7 @@ export const Form = styled.form`
     font-weight: 600;
     font-size: 1.2rem;
     color: white;
+    margin-top: 3rem;
   }
   label {
     text-align: start;
@@ -98,7 +104,7 @@ export const Form = styled.form`
     height: 2.5rem;
     border: none;
     border-radius: 4px;
-    width: 92%;
+    width: 94%;
     margin-left: 0.6rem;
     margin-bottom: 3rem;
   }
@@ -115,16 +121,15 @@ export const Form = styled.form`
 export const Modal = styled(motion.div)`
   max-width: 300px;
   display: flex;
+  gap: 1rem;
   flex-direction: column;
   background: #212529;
   border-radius: 5px;
   text-align: left;
   position: absolute;
-
   @media (min-width: 900px) {
     left: 40%;
   }
-
   div {
     margin: 0;
     display: flex;
@@ -155,7 +160,6 @@ export const Modal = styled(motion.div)`
   }
   select {
     margin-top: 1rem;
-    width: 91%;
   }
   button {
     background: #ff577f;
@@ -169,7 +173,6 @@ export const Modal = styled(motion.div)`
     margin-bottom: 2rem;
   }
 `;
-
 export const Lista = styled.ul`
   background: #212529;
   display: flex;
@@ -177,15 +180,14 @@ export const Lista = styled.ul`
   padding: 0;
   margin-left: 1rem;
   margin-right: 1rem;
+  border-radius: 6px;
+  gap: 1rem;
+  padding: 1rem;
   li {
     display: flex;
     justify-content: space-around;
     padding: 0;
     background: #121214;
-    width: 90%;
-    margin-left: 5%;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
     border-radius: 0.6rem;
   }
   li:hover {
@@ -205,9 +207,6 @@ export const Lista = styled.ul`
     li {
       justify-content: space-between;
       p {
-        margin: 1rem;
-      }
-      button {
         margin: 1rem;
       }
     }

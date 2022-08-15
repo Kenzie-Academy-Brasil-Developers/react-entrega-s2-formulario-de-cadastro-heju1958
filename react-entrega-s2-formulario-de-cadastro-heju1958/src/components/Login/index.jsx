@@ -20,7 +20,7 @@ const Login = () => {
   return (
     <>
       <Container initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-        <img src="./Logo.png" alt="logo" />
+        <img src="./Logo.png" alt="logo" className="imgLogin"/>
         <Form onSubmit={handleSubmit(onSubmitFunction)}>
           <p className="conta">Login</p>
           <label>Email</label>
