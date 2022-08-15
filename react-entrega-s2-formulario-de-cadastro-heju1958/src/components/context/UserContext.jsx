@@ -79,7 +79,7 @@ function UserProvider({ children }) {
         .catch(function (error) {
           localStorage.clear();
         });
-    }
+    } else return navigate("/");
   }, []);
 
   return (
