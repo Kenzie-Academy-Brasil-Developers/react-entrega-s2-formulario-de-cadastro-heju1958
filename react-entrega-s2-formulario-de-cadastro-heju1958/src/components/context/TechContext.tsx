@@ -1,20 +1,48 @@
 import axios from "axios";
-import { useContext, createContext } from "react";
+import { useContext, createContext, ReactNode } from "react";
 import { toast } from "react-toastify";
-import { UserContext } from "../context/UserContext";
+import { UserContext } from "./UserContext";
 
-export const TechContext = createContext({});
+export interface ITechs {
+  id: string;
+  title: string;
+  status: string;
+}
 
-function TechProvider({ children }) {
+interface TechProps {
+  children: ReactNode;
+}
+
+interface TechProviderData {
+  deleteTech: (id: string) => void;
+  createTech: (data: ITechs) => void;
+}
+
+export const TechContext = createContext<TechProviderData>(
+  {} as TechProviderData
+);
+
+interface IPost {
+  created_at: string;
+  id: string;
+  status: string;
+  title: string;
+  update_at: string;
+  user: { id: string };
+}
+
+type DeleteResponse = "";
+
+function TechProvider({ children }: TechProps) {
   const { setLoading, techs, setTechs } = useContext(UserContext);
 
-  const createTech = (data) => {
+  const createTech = (data: ITechs) => {
     const token = localStorage.getItem("token");
     const url = "https://kenziehub.herokuapp.com/users/techs";
     setLoading(true);
     if (token) {
       axios
-        .post(url, data, {
+        .post<IPost>(url, data, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -31,19 +59,19 @@ function TechProvider({ children }) {
     }
   };
 
-  const deleteTech = (id) => {
+  const deleteTech = (id: string) => {
     const token = localStorage.getItem("token");
     const url = `https://kenziehub.herokuapp.com/users/techs/${id}`;
     setLoading(true);
     if (token) {
       axios
-        .delete(url, {
+        .delete<DeleteResponse>(url, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
         .then(function (response) {
-          const remove = techs.filter((elem) => elem.id !== id);
+          const remove = techs.filter((elem: ITechs) => elem.id !== id);
           setTechs(remove);
         })
         .catch(function (error) {

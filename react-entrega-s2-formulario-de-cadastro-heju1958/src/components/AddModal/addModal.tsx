@@ -1,21 +1,25 @@
 import { TechContext } from "../context/TechContext";
 import { useContext } from "react";
 import { Modal } from "../Styles";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { formSchemaTech } from "../validations";
+import { IModal } from "../Dasboard";
+import { ITechs } from "../context/TechContext";
 
-const AddModal = ({ setModal }) => {
+const AddModal = ({ setModal }: IModal) => {
+
   const { createTech } = useContext(TechContext);
+  
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<ITechs>({
     resolver: yupResolver(formSchemaTech),
   });
 
-  const onSubmitFunction = (data) => {
+  const onSubmitFunction: SubmitHandler<ITechs> = (data) => {
     createTech(data);
   };
 
@@ -34,7 +38,6 @@ const AddModal = ({ setModal }) => {
           placeholder="Nome da tecnologia"
           {...register("title")}
         />
-        <span>{errors.email?.message}</span>
         <label>Selecionar status</label>
         <select {...register("status")}>
           <option value={"Iniciante"}>Iniciante</option>

@@ -5,6 +5,7 @@ import { UserContext } from "../context/UserContext";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
+import { IUser } from "../context/UserContext";
 
 const Login = () => {
   const { onSubmitFunction, loading } = useContext(UserContext);
@@ -13,14 +14,14 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IUser>({
     resolver: yupResolver(formSchemaLogin),
   });
 
   return (
     <>
       <Container initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-        <img src="./Logo.png" alt="logo" className="imgLogin"/>
+        <img src="./Logo.png" alt="logo" className="imgLogin" />
         <Form onSubmit={handleSubmit(onSubmitFunction)}>
           <p className="conta">Login</p>
           <label>Email</label>

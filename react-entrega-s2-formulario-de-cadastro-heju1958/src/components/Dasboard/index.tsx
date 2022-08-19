@@ -5,6 +5,11 @@ import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { TechContext } from "../context/TechContext";
 
+export interface IModal {
+  modal?: boolean
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 const Dasboard = () => {
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
